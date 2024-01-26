@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Public } from 'src/decorators/public.decorator';
 import { User } from '../users/models/auth.model';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -10,12 +11,12 @@ export class AuthController {
         private authService: AuthService
     ) { }
 
+    @Public()
     @Post('login')
     signIn(@Body() data: SigninDto) {
         return this.authService.signIn(data.user, data.password);
     }
 
-    @UseGuards(AuthGuard)
     @Get('profile')
     getProfile(@Request() req: User) {
         return req.user;
