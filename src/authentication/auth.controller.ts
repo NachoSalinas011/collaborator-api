@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Request, ValidationPipe } from '@nestjs/common';
 import { Public } from 'src/decorators/public.decorator';
-import { User } from '../modules/user/schemas/user.schema';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -24,7 +23,7 @@ export class AuthController {
     }
 
     @Get('profile')
-    getProfile(@Request() data: User) {
-        return data;
+    getProfile(@Request() data: any) {
+        return data.user;
     }
 }

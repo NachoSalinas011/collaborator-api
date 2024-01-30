@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
 import UserRole from 'src/common/enums/role.enum';
+import { IsValidId } from 'src/decorators/id.decorator';
 import { Public } from 'src/decorators/public.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { RoleCreateDto } from './dto/role-create.dto';
@@ -20,6 +21,7 @@ export class RoleController {
     }
 
     @Roles(UserRole.ADMIN.name)
+    @IsValidId()
     @Put('update/:id')
     async update(@Param('id') id: string, @Body(new ValidationPipe()) data: roleUpdateDto) {
         return this.roleService.update(id, data);
@@ -31,11 +33,13 @@ export class RoleController {
         return this.roleService.getAll();
     }
 
+    @IsValidId()
     @Get('getById/:id')
     async getById(@Param('id') id: string) {
         return this.roleService.findById(id);
     }
 
+    @IsValidId()
     @Roles(UserRole.ADMIN.name)
     @Delete('delete/:id')
     async delete(@Param('id') id: string) {
