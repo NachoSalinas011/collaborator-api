@@ -1,23 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Skill } from '../../skill/schemas/skill.schema';
+import { Acquiredskills } from '../interfaces/acquiredSkills.interface';
+import { Person } from '../interfaces/person.interface';
 
-class Address {
-    city: string;
-    street: string;
-    number: string;
-    country: string;
-}
-
-class Skills {
-    skill: Skill;
-    level: number;
-}
-
-class Person {
-    name: string;
-    birthDate: Date;
-    address: Address;
-}
 
 @Schema()
 export class Collaborator {
@@ -25,16 +9,16 @@ export class Collaborator {
     person: Person;
 
     @Prop({ required: true })
-    role: string;
-    
+    jobPosition: string;
+
     @Prop({ required: true })
     admissionDate: Date;
-    
+
     @Prop({ required: false })
     dischargeDate?: Date;
-    
+
     @Prop({ required: false })
-    aquiredSkills: Skills[]
+    acquiredSkills: Acquiredskills[]
 }
 
 export const CollaboratorSchema = SchemaFactory.createForClass(Collaborator);

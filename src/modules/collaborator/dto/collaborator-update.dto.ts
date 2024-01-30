@@ -1,9 +1,9 @@
-import { Type } from "class-transformer";
-import { IsDateString, IsNotEmpty, IsOptional, ValidateNested } from "class-validator";
+import { Type } from 'class-transformer';
+import { IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
 import { acquiredskillsDto } from './acquiredSkills.dto';
-import { personDto } from "./person.dto";
+import { personDto } from './person.dto';
 
-export class collaboratorCreateDto {
+export class collaboratorUpdateDto {
     @ValidateNested()
     @Type(() => personDto)
     person: personDto;

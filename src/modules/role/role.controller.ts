@@ -15,30 +15,30 @@ export class RoleController {
 
     @Roles(UserRole.ADMIN.name)
     @Post('create')
-    async create(@Body(new ValidationPipe()) role: RoleCreateDto) {
-        return this.roleService.create(role);
+    async create(@Body(new ValidationPipe()) data: RoleCreateDto) {
+        return this.roleService.create(data);
     }
 
     @Roles(UserRole.ADMIN.name)
     @Put('update/:id')
-    async update(@Param('id') id: string, @Body(new ValidationPipe()) role: roleUpdateDto) {
-        return this.roleService.update(id, role);
+    async update(@Param('id') id: string, @Body(new ValidationPipe()) data: roleUpdateDto) {
+        return this.roleService.update(id, data);
     }
 
     @Public()
-    @Get('allRoles')
+    @Get('all')
     async getAll() {
         return this.roleService.getAll();
     }
 
-    @Get('GetById/:id')
-    async GetById(@Param('id') id: string) {
+    @Get('getById/:id')
+    async getById(@Param('id') id: string) {
         return this.roleService.findById(id);
     }
 
     @Roles(UserRole.ADMIN.name)
-    @Delete('Delete/:id')
-    async Delete(@Param('id') id: string) {
+    @Delete('delete/:id')
+    async delete(@Param('id') id: string) {
         return this.roleService.delete(id);
     }
 }

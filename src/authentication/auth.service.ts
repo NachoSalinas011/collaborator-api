@@ -12,7 +12,7 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
-    async register(data: RegisterDto): Promise<any> {
+    async register(data: RegisterDto): Promise<void> {
         const exist = await this.userService.getByEmail(data.email);
 
         if (exist) {

@@ -20,7 +20,7 @@ export class RoleService {
 
     async update(id: string, role: roleUpdateDto) {
         return this.roleModel.findByIdAndUpdate(id, role, {
-            new: true,
+            new: true
         }).exec();
     }
 
