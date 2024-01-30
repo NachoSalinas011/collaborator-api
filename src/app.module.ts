@@ -3,15 +3,17 @@ import { APP_GUARD } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthModule } from './auth/auth.module';
-import { RolesGuard } from './auth/roles.guard';
-import { CollaboratorModule } from './collaborator/collaborator.module';
-import { cnnString } from './common/connectionHelper';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from './authentication/auth.module';
+import { AuthGuard } from './authentication/guards/auth.guard';
+import { RolesGuard } from './authentication/guards/roles.guard';
+import { cnnString } from './common/helpers/connection.helper';
+import { CollaboratorModule } from './modules/collaborator/collaborator.module';
+import { RoleModule } from './modules/role/role.module';
+import { SkillModule } from './modules/skill/skill.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [MongooseModule.forRoot(cnnString), CollaboratorModule, AuthModule, UsersModule],
+  imports: [MongooseModule.forRoot(cnnString), CollaboratorModule, AuthModule, UserModule, SkillModule, RoleModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_GUARD,
