@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,6 +7,7 @@ import { AuthModule } from './authentication/auth.module';
 import { AuthGuard } from './authentication/guards/auth.guard';
 import { IdGuard } from './authentication/guards/id.guard';
 import { RolesGuard } from './authentication/guards/roles.guard';
+import { GenericExceptionFilter } from './common/filters/exception.filter';
 import { cnnString } from './common/helpers/connection.helper';
 import { CollaboratorModule } from './modules/collaborator/collaborator.module';
 import { RoleModule } from './modules/role/role.module';
@@ -17,6 +18,10 @@ import { UserModule } from './modules/user/user.module';
   imports: [MongooseModule.forRoot(cnnString), CollaboratorModule, AuthModule, UserModule, SkillModule, RoleModule],
   controllers: [AppController],
   providers: [AppService,
+    {
+      provide: APP_FILTER,
+      useClass: GenericExceptionFilter
+    },
     {
       provide: APP_GUARD,
       useClass: AuthGuard
