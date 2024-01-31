@@ -3,7 +3,9 @@ import { Acquiredskills } from '../interfaces/acquiredSkills.interface';
 import { Person } from '../interfaces/person.interface';
 
 
-@Schema()
+@Schema({
+    timestamps: true
+})
 export class Collaborator {
     @Prop({ required: true })
     person: Person;

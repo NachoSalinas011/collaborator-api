@@ -6,7 +6,9 @@ class Role {
     id: string;
 }
 
-@Schema()
+@Schema({
+    timestamps: true
+})
 export class User {
     @Prop({ requierd: true })
     email: string;
