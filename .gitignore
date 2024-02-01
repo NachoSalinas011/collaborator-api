@@ -35,3 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 connectionHelper.ts
+
+# Permitir que example.env se suba al repositorio
+!example.env
